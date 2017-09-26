@@ -3,10 +3,9 @@
 
 var keys = require('./keys');
 
-console.log(keys);
 
 var twitter = require("twitter");
-// var spotify = require("spotify");
+var Spotify = require('node-spotify-api');
 // var request = require("request")
 var fs = require("fs");
 
@@ -59,14 +58,25 @@ getTweets(tweetieBird);
 
 }
 
+var query = process.argv.slice(3);
+console.log(query.join(""));
 
-switch(liriArrgs){
 
-	case 'my-tweets':
+if (liriArrgs === "my-tweets"){
 	myTweets();
-	break;
-
+} else if (liriArrgs === "spotify-this-song") {
+	mySpotify(query);
 }
+
+
+
+// switch(liriArrgs){
+
+// 	case 'my-tweets':
+// 	myTweets();
+// 	break;
+
+// }
 
 //what louis sent me 
 // var params = {
@@ -117,4 +127,30 @@ function getTweets(tweets) {
 // };
 
 
+//Spotify starts here 
 
+
+
+
+var params = {
+	
+
+
+}
+
+ function mySpotify(song) {
+ 	console.log(song);
+ 	var music = new Spotify(keys.spotifyKeys);
+
+
+
+music.search({ type: 'track', query: song }, function(err, data) {
+  if (err) {
+    return console.log('Error occurred: ' + err);
+  }
+ 
+console.log(data); 
+});
+
+
+}
