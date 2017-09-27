@@ -74,24 +74,7 @@ function getTweets(tweets) {
 }
 
 
-	
 
-
-// } else {
-// 	var outputString = "========\n" + "User Tweets:\n" + "========\n\n";
-
-// for (var i=0; i < tweets.length; i++) {
-// 	outputString += "created on: " + tweets[i].created_at + "tweet content: " + tweets[i].text;
-
-// }
-
-// //appending
-// fs.appendFile("log.txt", "Liri Response: " + outputString, function(err) {
-// 	if (err) {
-// 		console.log(err);
-// 	}
-// })
-// };
 
 
 //Spotify starts here 
@@ -106,22 +89,7 @@ function getTweets(tweets) {
 
 
 music.search({ type: 'track', query: song }).then(function(response){
-  // if (err) {
-  //   return console.log('Error occurred: ' + err);
-  // }
-  // else { 
-  // 	var songInfo = data.tracks.items[0];
-  // 	if (!songInfo) {
-  // 		var errorString = "Error: No song info to retrieve";
-  // 		console.log(errorString);
-  	
 
-  // 	return;
-
-  // } else {
-  // 	var songOutput = "Song Name:" + songInfo.name + "Artist:" + songInfo.artist[0].name + "Album:" + songInfo.album.name + "Preview Link Here:" + songInfo.preview_url;
-  // 	console.log(songOutput);
-			  // }
 
 		for (var i = 0; i < response.tracks.items.length; i++) {
 			console.log(response.tracks.items[i].name);
