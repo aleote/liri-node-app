@@ -60,6 +60,7 @@ getTweets(tweetieBird);
 
 var query = process.argv.slice(3);
 console.log(query.join(""));
+query = query.join('');
 
 
 if (liriArrgs === "my-tweets"){
@@ -129,28 +130,43 @@ function getTweets(tweets) {
 
 //Spotify starts here 
 
-
-
-
-var params = {
-	
-
-
-}
-
  function mySpotify(song) {
  	console.log(song);
  	var music = new Spotify(keys.spotifyKeys);
 
 
-
-music.search({ type: 'track', query: song }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
-  }
- 
-console.log(data); 
-});
+	song = 'ace of bass';
 
 
+
+music.search({ type: 'track', query: song }).then(function(response){
+  // if (err) {
+  //   return console.log('Error occurred: ' + err);
+  // }
+  // else { 
+  // 	var songInfo = data.tracks.items[0];
+  // 	if (!songInfo) {
+  // 		var errorString = "Error: No song info to retrieve";
+  // 		console.log(errorString);
+  	
+
+  // 	return;
+
+  // } else {
+  // 	var songOutput = "Song Name:" + songInfo.name + "Artist:" + songInfo.artist[0].name + "Album:" + songInfo.album.name + "Preview Link Here:" + songInfo.preview_url;
+  // 	console.log(songOutput);
+			  // }
+
+		for (var i = 0; i < response.tracks.items.length; i++) {
+			console.log(response.tracks.items[i].name);
+		}
+
+
+			 });
 }
+  
+
+
+
+
+
