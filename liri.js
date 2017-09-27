@@ -80,11 +80,15 @@ function getTweets(tweets) {
 //Spotify starts here 
 
  function mySpotify(song) {
- 	console.log(song);
+ 	// console.log(song);
  	var music = new Spotify(keys.spotifyKeys);
 
+ 	if (song === undefined){
+ 		song = "ace of base";
+ 	}
 
-	song = 'ace of bass';
+
+	
 
 
 
