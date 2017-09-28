@@ -19,6 +19,11 @@ var params = {
 
 var liriArrgs = process.argv[2];
 
+var liriArrgs3 = process.argv.slice(3);
+var query = liriArrgs3.join(" ");
+
+
+
 
 function myTweets ( ) {
 Tweety.get('statuses/user_timeline', params, gotData);
@@ -48,19 +53,23 @@ getTweets(tweetieBird);
 
 }
 
-var query = process.argv.slice(3);
-console.log(query.join(""));
-query = query.join('');
+
+
+console.log(query);
 
 
 if (liriArrgs === "my-tweets"){
 	myTweets();
 } else if (liriArrgs === "spotify-this-song") {
 	mySpotify(query);
-} else (liriArrgs === "movie-this") {
+} 
+else if (liriArrgs === "movie-this") {
 	// what goes here? 
-	OMDBInfo(movie);
-}
+	OMDBInfo(query);
+
+} else if (liriArrgs === "do-what-it-says") {
+	doWhat();
+};
 
 
 
@@ -87,6 +96,7 @@ function mySpotify(song) {
     // console.log(song);
 
     var music = new Spotify(keys.spotifyKeys);
+ 
 
     if (song === undefined) {
 
@@ -102,17 +112,17 @@ function mySpotify(song) {
 
     }).then(function (response) {
 
-        var song = response.tracks.items;
-
-	        // console.log(song);
+    
 
         for (var i = 0; i < song.length; i++) {
 
-            console.log("Song Title:" + song[i].name);
 
-            console.log("Preview Url:" + song[i].preview_url);
 
-            console.log("Album:" + song[i].album.album_type);
+            console.log("Song Title:" + response.tracks.items[i].name);
+
+            console.log("Preview Url:" + response.tracks.items[i].preview_url);
+
+            console.log("Album:" + response.tracks.items[i].album.album_type);
         }
 
     });
@@ -121,9 +131,12 @@ function mySpotify(song) {
 
 // OMDB Movie starts here ! 
 
+
+
  function OMDBInfo(movie) {
 
- 		 
+ 	console.log(movie);
+
 
  		if (movie === "") {
 
@@ -134,7 +147,7 @@ function mySpotify(song) {
 
 // taken from npm website for request
 // send the request to OMDB website 
-request( queryURL , function (error, response, body) {
+request(queryURL, function (error, response, body) {
  		 console.log('error for OMDB:', error);
 
 		console.log('Title: ' + JSON.parse(body).Title);
@@ -145,8 +158,9 @@ request( queryURL , function (error, response, body) {
         console.log('Language: ' + JSON.parse(body).Language);
         console.log('Plot: ' + JSON.parse(body).Plot);
         console.log('Actors: ' + JSON.parse(body).Actors);
-  }
+  })
  };
+
 
 
 
@@ -154,6 +168,20 @@ request( queryURL , function (error, response, body) {
 
   // for (var i = 0; i < movie.length; i++) {
   // 	console.log(movie[i].name
-  }
-  
+
+
+function doWhat(){
+	fs.readFile("random.txt", "utf8", function(err, data){
+		if (err) {
+			console.log(err);
+		}
+
+	console.log(data)
+
+	var dataArr = data.split(",");
+
+	mySpotify(dataArr[1]);
+
 });
+
+}
