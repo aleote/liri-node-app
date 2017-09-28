@@ -75,36 +75,48 @@ function getTweets(tweets) {
 
 
 
-
+  
 
 //Spotify starts here 
 
- function mySpotify(song) {
- 	// console.log(song);
- 	var music = new Spotify(keys.spotifyKeys);
+function mySpotify(song) {
 
- 	if (song === undefined){
- 		song = "ace of base";
- 	}
+    // console.log(song);
+
+    var music = new Spotify(keys.spotifyKeys);
+
+    if (song === undefined) {
+
+        song = "ace of base";
+
+    }
+
+    music.search({
+
+        type: 'track',
+
+        query: song
+
+    }).then(function (response) {
+
+        var song = response.tracks.items;
+
+	        // console.log(song);
+
+        for (var i = 0; i < song.length; i++) {
+
+            console.log("Song Title:" + song[i].name);
+
+            console.log("Preview Url:" + song[i].preview_url);
+
+            console.log("Album:" + song[i].album.album_type);
 
 
-	
+        }
 
+    });
 
-
-music.search({ type: 'track', query: song }).then(function(response){
-
-
-		for (var i = 0; i < response.tracks.items.length; i++) {
-			console.log(response.tracks.items[i].name);
-		}
-
-
-			 });
 }
-  
-
-
 
 
 
