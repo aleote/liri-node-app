@@ -6,7 +6,7 @@ var keys = require('./keys');
 
 var twitter = require("twitter");
 var Spotify = require('node-spotify-api');
-// var request = require("request")
+var request = require("request")
 var fs = require("fs");
 
 
@@ -57,6 +57,9 @@ if (liriArrgs === "my-tweets"){
 	myTweets();
 } else if (liriArrgs === "spotify-this-song") {
 	mySpotify(query);
+} else (liriArrgs === "movie-this") {
+	// what goes here? 
+	OMDBInfo(movie);
 }
 
 
@@ -110,13 +113,47 @@ function mySpotify(song) {
             console.log("Preview Url:" + song[i].preview_url);
 
             console.log("Album:" + song[i].album.album_type);
-
-
         }
 
     });
 
 }
 
+// OMDB Movie starts here ! 
+
+ function OMDBInfo(movie) {
+
+ 		 
+
+ 		if (movie === "") {
+
+        movie = "Mr. Nobody";
+    }
+    
+        var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=40e9cece";
+
+// taken from npm website for request
+// send the request to OMDB website 
+request( queryURL , function (error, response, body) {
+ 		 console.log('error for OMDB:', error);
+
+		console.log('Title: ' + JSON.parse(body).Title);
+        console.log('Year: ' + JSON.parse(body).Year);
+        console.log('Rotten Tomatoes Rating: ' + JSON.parse(body).Ratings[1].Value);
+        console.log('imdb Rating: ' + JSON.parse(body).imdbRating);
+        console.log('Country: ' + JSON.parse(body).Country);
+        console.log('Language: ' + JSON.parse(body).Language);
+        console.log('Plot: ' + JSON.parse(body).Plot);
+        console.log('Actors: ' + JSON.parse(body).Actors);
+  }
+ };
 
 
+
+
+
+  // for (var i = 0; i < movie.length; i++) {
+  // 	console.log(movie[i].name
+  }
+  
+});
